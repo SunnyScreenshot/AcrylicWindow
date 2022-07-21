@@ -1,7 +1,6 @@
 #include "exwidget.h"
 #include <windows.h>
 
-
 ExWidget::ExWidget(QWidget *parent)
     : QWidget(parent)
 {
@@ -18,5 +17,5 @@ ExWidget::ExWidget(QWidget *parent)
     fun pSetBlur = (fun)GetProcAddress(hDLL, "setAeroEffect");
     pSetBlur((HWND)(winId()));
 
-    //FreeLibrary(hDLL);
+    //FreeLibrary(hDLL);  // 系统亦会自动释放
 }

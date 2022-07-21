@@ -2,14 +2,19 @@
 
 ### Project
 
+- 『BlurEffect』奇思妙想，实现的 **等效** 跨平台透明磨砂效果
 - 『AcrylicMaterial』生成 `AcrylicMaterial.dll`， 调用 Windows 10 SDK 不公开的 API
-- 『Demo』示例，调用上面  `AcrylicMaterial.dll` 的接口，显示一个 QWidget 窗口
+- 『Demo』示例 `.exe` ，调用上面  `AcrylicMaterial.dll` 的接口，显示一个 QWidget 窗口
 
 <br>
 
 ### Show
 
 <img src="./SnapShoot/display.png" width="80%"/>
+
+<br>
+
+<img src="./SnapShoot/BlurEffect.gif" width="80%"/>
 
 <br>
 
@@ -35,6 +40,15 @@
     QtWin::extendFrameIntoClientArea(this, -1, -1, -1, -1);
 #endif
 ```
+
+<br>
+
+### Note
+
+If the running background images does not load, please check
+
+- `.dll` Path
+- `Image` Path
 
 <br>
 
