@@ -16,6 +16,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
+    int m_blurVal;
     Widget* m_pw1;
     Widget* m_pw2;
     QGraphicsBlurEffect* m_pBlurEffect;

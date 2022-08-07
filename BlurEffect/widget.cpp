@@ -30,4 +30,27 @@ void Widget::paintEvent(QPaintEvent *event)
 
     if (!m_pix.isNull())
         painter.drawPixmap(rect(), m_pix);
+
+    QPainter pa(this);
+    pa.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    if (!m_pix.isNull())
+        pa.drawPixmap(rect(), m_pix);
+
+    QColor colBrush("#131313");
+    colBrush.setAlphaF(0.6);
+    pa.setBrush(colBrush);
+    QColor colPen("#FFFFFF");
+    colPen.setAlphaF(0.1);
+    QPen pen(colPen, 1);
+    pa.setPen(pen);
+
+    const int margin1 = 1;
+    pa.drawRoundedRect(contentsRect().adjusted(margin1, margin1, -margin1, -margin1), 4, 4);
+
+    colPen.setNamedColor("#000000");
+    colPen.setAlphaF(0.1);
+    pa.setPen(colPen);
+    pa.setBrush(Qt::NoBrush);
+    const int margin2 = 0;
+    pa.drawRoundedRect(contentsRect().adjusted(margin2, margin2, -margin2, -margin2), 4, 4);
 }

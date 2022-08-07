@@ -10,6 +10,7 @@
 
 BlurWidget::BlurWidget(QWidget *parent)
     : QWidget(parent)
+    , m_blurVal(5)
     , m_pw1(nullptr)
     , m_pw2(nullptr)
     , m_pBlurEffect(nullptr)
@@ -44,10 +45,11 @@ BlurWidget::BlurWidget(QWidget *parent)
     QSlider* slider = new QSlider(this);
     slider->setOrientation(Qt::Horizontal);
     slider->setFixedWidth(width() * 2 / 3);
-    slider->setValue(5);
+    slider->setValue(m_blurVal);
     slider->setRange(0, 200);
     slider->setPageStep(1);
     connect(slider, &QSlider::valueChanged, this, [&](int value){
+        m_blurVal = value;
         if (m_pBlurEffect)
             m_pBlurEffect->setBlurRadius(value);
     });
@@ -61,7 +63,7 @@ BlurWidget::BlurWidget(QWidget *parent)
 
     // Effect
     m_pBlurEffect = new QGraphicsBlurEffect();
-    m_pBlurEffect->setBlurRadius(5);
+    m_pBlurEffect->setBlurRadius(m_blurVal);
     m_pBlurEffect->setBlurHints(QGraphicsBlurEffect::PerformanceHint);
     m_pw2->setGraphicsEffect(m_pBlurEffect);
     m_pw2->lower();
@@ -69,34 +71,21 @@ BlurWidget::BlurWidget(QWidget *parent)
 
 void BlurWidget::resizeEvent(QResizeEvent *event)
 {
-    m_pw2->setGeometry(0, 0, width(), height());  // 最底层放置一层模糊的图片
+    m_pw2->setGeometry(0, 0, width() , height());  // 最底层放置一层模糊的图片
     return QWidget::resizeEvent(event);
 }
 
 
 void BlurWidget::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED(event)
+    Q_UNUSED(event);
+    setWindowTitle(QString("blur:%1").arg(m_blurVal));
 
-    QPainter pa(m_pw2);
-    pa.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    //QPainter pa(this);
+    //pa.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
-    QColor colBrush(Qt::red);  // "#131313"
-    colBrush.setAlphaF(1);
-    pa.setBrush(colBrush);
-    QColor colPen("#FFFFFF");
-    colPen.setAlphaF(0.1);
-    QPen pen(colPen, 1);
-    pa.setPen(pen);
+    //pa.setBrush(Qt::NoBrush);
+    //pa.setPen(QPen(Qt::red, 2));
 
-    const int margin1 = 1;
-    const int B_RADIRS = 6;
-    pa.drawRoundedRect(contentsRect().adjusted(margin1, margin1, -margin1, -margin1), B_RADIRS, B_RADIRS);
-
-    colPen.setNamedColor("#000000");
-    colPen.setAlphaF(0.1);
-    pa.setPen(colPen);
-    pa.setBrush(Qt::NoBrush);
-    const int margin2 = 0;
-    pa.drawRoundedRect(contentsRect().adjusted(margin2, margin2, -margin2, -margin2), B_RADIRS, B_RADIRS);
+    //pa.drawText(QPoint(rect().x(), rect().bottom() - 50), QString("blur:%1").arg(m_blurVal));
 }
