@@ -20,19 +20,7 @@ BlurWidget::BlurWidget(QWidget *parent)
     layout->setSpacing(10);
     layout->addSpacing(50);
 
-    // 氪，默认是 .exe 的路径，采用 MSVC 会多一层 {debug/release}, 则多以额 .. , gcc 则少一个 ..
-    
-    QString path("../resources/p2.jpg");
-    QDir dir(path);
-
-    bool b = false;
-    if (!dir.exists()) {
-        path = QString("../") + path;
-
-        dir.setPath(path);
-    }
-
-    QPixmap pix(path);
+    QPixmap pix("../resources/p2.jpg");
     m_pw1 = new Widget();
     m_pw1->setPixmap(pix);
     m_pw1->setFixedSize(200, 200);

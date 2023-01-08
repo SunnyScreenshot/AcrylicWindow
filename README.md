@@ -1,10 +1,25 @@
 # AcrylicWindow
 
+> Win10 Acrylic(亚克力)、Win11 mica(云母)、Win7 Aero Glass(毛玻璃)；也就是通常说的 **透明磨砂** 效果；
+
+<br>
+
+###  Acrylic Material Document
+
+| OS VERSION | APPELLATION                    | SDK                               | EXPLAIN                                                      |
+| ---------- | ------------------------------ | --------------------------------- | ------------------------------------------------------------ |
+| Windows 7  | Aero Glass / 毛玻璃 / 磨砂玻璃 | `extendFrameIntoClientArea()`     | only Windows 7 / Vista                                       |
+| Windows 10 | Acrylic Material / 亚克力 材质 | `SetWindowCompositionAttribute()` | [MSDN DOC](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) |
+| Windows 11 | Mica / 云母                    | `SetWindowCompositionAttribute()` | [MSDN DOC](https://docs.microsoft.com/en-us/windows/apps/design/signature-experiences/materials) |
+
+<br>
+
 ### Project
 
-- 『BlurEffect』奇思妙想，实现的 **等效** 跨平台透明磨砂效果
-- 『AcrylicMaterial』生成 `AcrylicMaterial.dll`， 调用 Windows 10 SDK 不公开的 API
-- 『Demo』示例 `.exe` ，调用上面  `AcrylicMaterial.dll` 的接口，显示一个 QWidget 窗口
+- **『BlurEffect』** 属奇思妙想，实现简单且跨平台，属 **等效** 跨平台透明磨砂效果；**原理: ** 在显示窗口的底层放一个 <u>"QWidget + 图片 + QGraphicsBlurEffect"</u> 作为铺垫
+- **『AcrylicMaterial + Demo』** 生成 `AcrylicMaterial.dll`， `Demo.exe`  调用上面  `AcrylicMaterial.dll` 的接口，显示一个 QWidget 窗口。**原理: ** 调用 Windows 10/7 SDK 不公开的 API
+- 矩阵逐个点去磨砂
+- qss？
 
 <br>
 
@@ -16,15 +31,7 @@
 
 <img src="./SnapShoot/BlurEffect.gif" width="80%"/>
 
-<br>
 
-###  Acrylic Material Document
-
-| OS VERSION | APPELLATION                    | SDK                               | EXPLAIN                                                      |
-| ---------- | ------------------------------ | --------------------------------- | ------------------------------------------------------------ |
-| Windows 7  | Aero Glass / 毛玻璃 / 磨砂玻璃 | `extendFrameIntoClientArea()`     | only Windows 7 / Vista                                       |
-| Windows 10 | Acrylic Material / 亚克力 材质 | `SetWindowCompositionAttribute()` | [MSDN DOC](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) |
-| Windows 11 | Mica / 云母                    | `SetWindowCompositionAttribute()` | [MSDN DOC](https://docs.microsoft.com/en-us/windows/apps/design/signature-experiences/materials) |
 
 <br>
 

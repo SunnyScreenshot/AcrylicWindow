@@ -16,9 +16,9 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    int m_blurVal;
-    Widget* m_pw1;
-    Widget* m_pw2;
+    int m_blurVal;     // 模糊参数
+    Widget* m_pw1;     // 上层，和底部进行效果对比
+    Widget* m_pw2;     // 置于底层且添加模糊
     QGraphicsBlurEffect* m_pBlurEffect;
 };
 
